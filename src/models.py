@@ -11,7 +11,7 @@ class Topic(Base):
     __tablename__ = "topics"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    text: Mapped[str] = mapped_column(String(500))
+    text: Mapped[str] = mapped_column(String(500), unique=True)
     frequency: Mapped[int] = mapped_column(Integer, default=0)
     language: Mapped[str] = mapped_column(String(3))
 

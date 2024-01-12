@@ -26,7 +26,6 @@ def upgrade() -> None:
             sa.Column("frequency", sa.Integer, default=0),
             sa.Column("language", sa.String(3)),
             )
-    
 
 
 def downgrade() -> None:
