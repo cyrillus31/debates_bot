@@ -1,18 +1,16 @@
 import os
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker 
-
-from models import Base, Topic
-
-TOPICS_FOLDER = os.path.join(os.getcwd(), "topics")
-
-engine = create_engine("sqlite:///database.db", echo=True)
-Session = sessionmaker(bind=engine)
+from repository import TopicsRepository
+from database import Topic
 
 
-def populate_database():
-    with Session(engine) as session:
+class TopicsService:
+
+    def __init__(self):
+        pass
+
+    def _add_topics_to_db(self) -> None:
+        topics_to_add = []
         root, folders, files = next(os.walk(TOPICS_FOLDER))
         for file in files:
             file = os.path.join(root, file)
@@ -23,10 +21,6 @@ def populate_database():
             with open(file, "r", encoding="utf-8") as txtfile:
                 for line in txtfile:
                     new_topic = Topic(text=line, language=language)
-                    session.add(new_topic)
+                    topics_to_add.append(new_topic)
+        
     
-        session.commit()
-
-
-
-

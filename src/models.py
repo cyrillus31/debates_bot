@@ -15,7 +15,6 @@ class Topic(Base):
     frequency: Mapped[int] = mapped_column(Integer, default=0)
     language: Mapped[str] = mapped_column(String(3))
 
-
     def __repr__(self) -> str:
-        return f"{self.language}: {self.text}."
+        return f"{self.text}"
 
