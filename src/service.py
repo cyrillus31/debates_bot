@@ -1,5 +1,5 @@
 import os
-from typing import Iterable
+import random
 
 from repository import TopicsRepository
 from database import Topic
@@ -12,7 +12,7 @@ class TopicsService:
     def __init__(self):
         self.repository = TopicsRepository()
 
-    def add_new_topics_to_db(self) -> None:
+    def _add_new_topics_to_db(self) -> None:
         topics_to_add = []
         root, folders, files = next(os.walk(TOPICS_FOLDER))
 
@@ -31,8 +31,20 @@ class TopicsService:
 
         self.repository._add_new_topics_to_db(topics_to_add)
 
-    def get_topics(self, **kwargs) -> Iterable[Topic | None]:
-        return self.repository.get(**kwargs)
+    def update_db(self) -> None:
+        self._add_new_topics_to_db()
+
+    def get_topics(self, **kwargs) -> list[Topic | None]:
+        topics = self.repository.get(**kwargs)
+        return topics
+
+    def get_single_topic(self, is_random=True, **kwargs) -> Topic | None:
+        topics = self.repository.get(**kwargs)
+        if not is_random:
+            return topics[0]
+        amount_of_topics = len(topics) 
+        random_index = random.randint(0, amount_of_topics-1)
+        return topics[random_index]
 
         
     

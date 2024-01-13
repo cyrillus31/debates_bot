@@ -11,7 +11,7 @@ class TopicsRepository:
     def __init__(self):
         pass
 
-    def get(self, offset: int = 0, limit: int = 10000, **kwargs) -> Iterable[Topic | None]:
+    def get(self, offset: int = 0, limit: int = 10000, **kwargs) -> list[Topic | None]:
         with get_db() as db:
             stmt = select(Topic).filter_by(**kwargs).offset(offset).limit(limit)
             results = db.scalars(stmt)
