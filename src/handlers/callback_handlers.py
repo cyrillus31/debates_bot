@@ -9,16 +9,17 @@ def callback_data_parser(call: types.CallbackQuery):
 def _edit_poll(**kwargs):
     bot.edit_message_text(**kwargs)
 
-@bot.callback_query_handler(lambda call: call.data == "for")
+@bot.callback_query_handler(lambda call: call.data in ["for", "against"])
 def register_vote(call: types.CallbackQuery):
     user = call.from_user
     message = call.message
-    topic = message.text.split("\n")[0]
-    edited_poll = Poll(topic=topic, proponent=user.first_name)
-    _edit_poll(text=edited_poll.topic, 
+        
+    edited_poll = Poll(message=message.text)
+
+    _edit_poll(text=edited_poll.generate_body(), 
                message_id=message.id, 
                chat_id=message.chat.id,
-               reply_markup=edited_poll.create_markup()
+               reply_markup=edited_poll.generate_markup()
                )
 
 
