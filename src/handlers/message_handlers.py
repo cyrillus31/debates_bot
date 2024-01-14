@@ -12,6 +12,6 @@ def welcome(message):
 @bot.message_handler(commands=["get_topic"])
 def get_topic(message):
     topic = ts.get_single_topic(is_random=True, language="RU").text
-    new_poll = Poll(message = topic)
+    new_poll = Poll(topic = topic)
     bot.send_message(message.chat.id, new_poll.generate_body(), reply_markup=new_poll.generate_markup())
 

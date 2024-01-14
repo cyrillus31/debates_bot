@@ -10,11 +10,14 @@ def _edit_poll(**kwargs):
     bot.edit_message_text(**kwargs)
 
 @bot.callback_query_handler(lambda call: call.data in ["for", "against"])
-def register_vote(call: types.CallbackQuery):
+def edit_poll(call: types.CallbackQuery):
     user = call.from_user
     message = call.message
         
-    edited_poll = Poll(message=message.text)
+    edited_poll = Poll(prev_message=message.text, 
+                       username=user.first_name, 
+                       user_side=call.data,
+                       )
 
     _edit_poll(text=edited_poll.generate_body(), 
                message_id=message.id, 
