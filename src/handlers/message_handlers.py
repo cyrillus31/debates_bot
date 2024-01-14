@@ -18,7 +18,7 @@ def get_topic(message):
 
 @bot.message_handler(commands=["get_multiple"])
 def get_multiple(message):
-    placeholder = "Enter a numbers from 1 to 30"
+    placeholder = "Enter a number from 1 to 30"
     reply = GET_MULTIPLE_MESSAGE
     bot.send_message(message.chat.id, reply, reply_markup=types.ForceReply(input_field_placeholder=placeholder))
 
@@ -32,10 +32,10 @@ def send_multiple_topcs(message):
         return
 
     if not (0 < amount <= 30):
-        bot.reply_to(message, "You are asking for too many topics.")
+        bot.reply_to(message, "You are asking for an unreasonable amount of topics.")
         return
 
-    for i in range(0, amount):
+    for _ in range(0, amount):
         new_topic = ts.get_single_topic(is_random=True)
         new_poll = Poll(topic = new_topic)
         bot.send_message(message.chat.id, new_poll.generate_body(), reply_markup=new_poll.generate_markup())

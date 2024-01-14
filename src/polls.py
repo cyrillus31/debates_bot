@@ -37,9 +37,6 @@ class Poll:
                 "proponent": proponent.strip(), 
                 "opponent": opponent.strip()
                 }
-
-        print(prev_msg_dict)
-
         return prev_msg_dict
 
     def generate_body(self) -> str:
