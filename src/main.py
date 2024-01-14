@@ -3,14 +3,9 @@ import handlers
 
 
 if __name__ == "__main__":
-    # while True:
-    #     try:
-    #         bot.infinity_polling()
-    #     except Exception as e:
-    #         print(e)
-
-    bot.infinity_polling() # delete this later
-
-
-    
+    while True:
+        try:
+            bot.infinity_polling()
+        except Exception as e:
+            print(e)
 

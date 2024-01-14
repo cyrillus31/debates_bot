@@ -37,9 +37,6 @@ class Poll:
                 "proponent": proponent.strip(), 
                 "opponent": opponent.strip()
                 }
-
-        print(prev_msg_dict)
-
         return prev_msg_dict
 
     def generate_body(self) -> str:
@@ -72,7 +69,7 @@ class Poll:
         buttons = [
             types.InlineKeyboardButton("For", callback_data="for"),
             types.InlineKeyboardButton("Against", callback_data="against"),
-            # types.InlineKeyboardButton("Next", callback_data="next"),
+            types.InlineKeyboardButton("Re-roll topic", callback_data="reroll"),
             ]
         markup.add(*buttons)
         return markup
