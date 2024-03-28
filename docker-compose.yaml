@@ -1,0 +1,10 @@
+version: '3'
+services:
+  debates_bot:
+    env_file:
+        - src/.env
+    build:
+      context: .
+    restart: always
+    command: sh -c "alembic upgrade head && python main.py;"
+
