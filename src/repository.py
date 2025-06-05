@@ -30,7 +30,7 @@ class TopicsRepository:
 
     def get_random_multiple(self, amount: int) -> list[Topic]:
         with get_db() as db:
-            stmt = select(Topic).order_by(func.random()).limit(amount).all()
+            stmt = select(Topic).order_by(func.random()).limit(amount)
             results = db.scalars(stmt)
             return [result for result in results]
 
