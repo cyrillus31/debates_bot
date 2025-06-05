@@ -34,8 +34,8 @@ class TopicsService:
     def update_db(self) -> None:
         self._add_new_topics_to_db()
 
-    def get_topics(self, **kwargs) -> list[Topic | None]:
-        topics = self.repository.get(**kwargs)
+    def get_topics(self, amount: int) -> list[Topic]:
+        topics = self.repository.get_random_multiple(amount)
         return topics
 
     def get_single_topic(self, is_random=True, **kwargs) -> Topic | None:

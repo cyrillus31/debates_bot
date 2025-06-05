@@ -35,9 +35,15 @@ def send_multiple_topcs(message):
         bot.reply_to(message, "You are asking for an unreasonable amount of topics.")
         return
 
-    for _ in range(0, amount):
-        new_topic = ts.get_single_topic(is_random=True)
-        new_poll = Poll(topic = new_topic)
+    topics = ts.get_topics(amount)
+    for topic in topics:
+        new_poll = Poll(topic=topic)
         bot.send_message(message.chat.id, new_poll.generate_body(), reply_markup=new_poll.generate_markup())
+
+    # NOTE: DEPRECATED
+    # for _ in range(0, amount):
+    #     new_topic = ts.get_single_topic(is_random=True)
+    #     new_poll = Poll(topic = new_topic)
+    #     bot.send_message(message.chat.id, new_poll.generate_body(), reply_markup=new_poll.generate_markup())
 
 

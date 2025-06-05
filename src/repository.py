@@ -1,6 +1,6 @@
 from typing import Iterable 
 
-from sqlalchemy import select
+from sqlalchemy import select, func
 
 from database import get_db
 from models import Topic
@@ -27,7 +27,13 @@ class TopicsRepository:
 
             db.add_all(only_new_topics)
             db.commit()
-            
+
+    def get_random_multiple(self, amount: int) -> list[Topic]:
+        with get_db() as db:
+            stmt = select(Topic).order_by(func.random()).limit(amount).all()
+            results = db.scalars(stmt)
+            return [result for result in results]
+
 
 
 
